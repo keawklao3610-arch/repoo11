@@ -1,0 +1,16 @@
+OR SAFETY INTELLIGENCE V2.3 — PRODUCTION-ONLY (NO DEMO)
+
+ระบบนี้ไม่แสดงข้อมูลสมมติและไม่มีปุ่มเข้าโหมดทดลอง ถ้าไม่ได้ตั้งค่า Google Cloud/Netlify หรือไม่มีสิทธิ์ ระบบจะแสดงหน้าแจ้งว่าระบบยังไม่พร้อมแทน Dashboard
+
+1. ติดตั้งจาก Source ZIP ผ่าน Git + Netlify หรือใช้ Netlify CLI (ห้ามใช้ Netlify Drop เพื่อเป็น Production Backend)
+2. ตั้งค่า GOOGLE_SHEET_ID=1DgXv1S9_T5KMfolTlncbgqLh5EqbE0yNVGt-vC02BRM
+3. ตั้ง GOOGLE_CLIENT_ID, GOOGLE_SERVICE_ACCOUNT_JSON, ADMIN_EMAILS, GOOGLE_DRIVE_FOLDER_ID ใน Netlify server Environment Variables อย่าใส่ credential ในโค้ดหรือในแชต
+4. เปิด Google Sheets API และ Drive API แชร์ Sheet V2.3 ให้ Service Account ที่อนุมัติ และเตรียม private Shared Drive folder สำหรับ PDF
+5. เพิ่ม Authorized JavaScript Origin ของ Netlify URL ใน OAuth Web Client
+6. Deploy แล้วตรวจ /api/?action=config ว่า configured=true; ลงชื่อเข้าใช้ด้วย Admin account
+7. ทดสอบเพิ่มเหตุการณ์ข้อมูลสมมติ 1 รายการผ่านหน้าเว็บ และยืนยันว่ามีแถวใน Google Sheets จริง; ทดสอบแก้ไข/Audit/SSI/RCA/PDF/Export
+8. ก่อนใช้ข้อมูลผู้ป่วยจริง ให้หน่วยงาน IT/PDPA ตรวจสิทธิ์การเข้าถึง ความปลอดภัยและสำรองข้อมูล
+
+หมายเหตุ: Google Sheets ไม่มีธุรกรรมแบบฐานข้อมูล SQL การแก้ไขพร้อมกันหลายคนต้องทดสอบเพิ่มเติม; งานวิกฤติที่ต้องรับประกันการเขียนทุกกรณีควรใช้ฐานข้อมูล transactional/queue.
+
+สถานะ: Code build/test ได้ แต่ยังไม่ถือว่าเป็นระบบออนไลน์ Production จนกว่า Site จริงและ API จะผ่าน End-to-End tests
