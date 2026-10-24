@@ -1,0 +1,17 @@
+OR SAFETY INTELLIGENCE V2.3 — CLEAN CLOUD PRODUCTION / FY2570
+
+Google Sheets ใหม่ (สร้างแล้ว ฐานเปล่า ไม่มีข้อมูลผู้ป่วย):
+https://docs.google.com/spreadsheets/d/1DgXv1S9_T5KMfolTlncbgqLh5EqbE0yNVGt-vC02BRM/edit
+
+1. เปิดฐานออนไลน์ แล้วตรวจ INCIDENTS / PDF_ARCHIVE / LEGACY_ARCHIVE ว่าว่าง
+2. สร้าง OAuth Client ID (Web) ใน Google Cloud และเพิ่ม origin URL ของ Netlify Site ที่ Deploy
+3. สร้าง Google service account และเปิด Google Sheets API กับ Google Drive API
+4. แชร์ฐาน Google Sheets กับ service-account client_email ในสิทธิ์ Editor
+5. สร้าง Private Google Drive folder สำหรับ PDF; ให้ service account มีสิทธิ์เข้าถึง
+6. Netlify Site ใหม่: Deploy source จาก Git/Netlify CLI (รองรับ Functions)
+7. Netlify Environment Variables: GOOGLE_SHEET_ID, GOOGLE_CLIENT_ID, GOOGLE_SERVICE_ACCOUNT_JSON, ADMIN_EMAILS, GOOGLE_DRIVE_FOLDER_ID
+8. Redeploy และตรวจ /api/?action=config ว่า configured:true
+9. Log in ด้วย admin ที่ระบุใน ADMIN_EMAILS แล้วทดสอบเพิ่ม/แก้ Incident แบบข้อมูลสมมติเท่านั้น
+10. ห้ามใช้ข้อมูลผู้ป่วยจริงจนกว่า IT/PDPA ของโรงพยาบาลอนุมัติความปลอดภัย
+
+IMPORTANT: ZIP does not contain Google credentials. Without administrator cloud setup the website blocks login; it does not show Demo data.

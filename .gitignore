@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+node_modules/
+.netlify/
+.DS_Store
+*.log
+*.pem
+*.p12
+service-account*.json
